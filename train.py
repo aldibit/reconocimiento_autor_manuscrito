@@ -29,8 +29,7 @@ def main():
     patience    = 5
 
     train_tf = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
+    transforms.Resize((224,224)),
     transforms.RandomRotation(5),
     transforms.ColorJitter(brightness=.2, contrast=.2),
     transforms.ToTensor(),
@@ -39,8 +38,7 @@ def main():
 ])
 
     val_tf = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
+    transforms.Resize((224,224)),
     transforms.ToTensor(),
     Ensure3(),                                    # ← use this
     transforms.Normalize([0.5]*3, [0.5]*3),

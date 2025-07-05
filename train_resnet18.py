@@ -1,5 +1,4 @@
 import os, copy, torch, torchvision
-from xml.parsers.expat import model
 from pathlib import Path
 from torchvision import transforms
 from torch.utils.data import DataLoader
@@ -55,16 +54,10 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("Device:", device)
 
-    model = torchvision.models.mobilenet_v2(weights="IMAGENET1K_V1")
-    model.classifier[1] = nn.Linear(model.last_channel, num_classes)
+    model = torchvision.models.resnet18(weights="IMAGENET1K_V1")
+    model.fc = nn.Linear(model.fc.in_features, num_classes)
+    # model.classifier[1] = nn.Linear(model.last_channel, num_classes)
     model = model.to(device)
-
-# ─── Congelar todo el backbone ───────────────────────────
-    for param in model.features.parameters():
-        param.requires_grad = False
-# ─── Asegurar que la cabeza clasificadora es entrenable ─
-    for param in model.classifier.parameters():
-        param.requires_grad = True
 
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
@@ -102,7 +95,7 @@ def main():
         if val_acc > best_acc:
             best_acc = val_acc
             best_wts = copy.deepcopy(model.state_dict())
-            torch.save(best_wts, model_out)
+            torch.save(model.state_dict(), "best_resnet18.pth")
             no_imp = 0
             print("  📈 Saved new best model")
         else:

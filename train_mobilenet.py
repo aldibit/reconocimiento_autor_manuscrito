@@ -1,5 +1,4 @@
 import os, copy, torch, torchvision
-from xml.parsers.expat import model
 from pathlib import Path
 from torchvision import transforms
 from torch.utils.data import DataLoader
@@ -59,15 +58,8 @@ def main():
     model.classifier[1] = nn.Linear(model.last_channel, num_classes)
     model = model.to(device)
 
-# ─── Congelar todo el backbone ───────────────────────────
-    for param in model.features.parameters():
-        param.requires_grad = False
-# ─── Asegurar que la cabeza clasificadora es entrenable ─
-    for param in model.classifier.parameters():
-        param.requires_grad = True
-
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
+    optimizer = optim.SGD(model.parameters(), lr=1e-2, momentum=0.9)
 
     best_wts, best_acc, no_imp = copy.deepcopy(model.state_dict()), 0.0, 0
 

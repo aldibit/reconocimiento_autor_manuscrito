@@ -23,7 +23,7 @@ class Ensure3:
 # ---------- Pipeline wrapped in main() ----------
 def main():
     data_root = Path("dataset_split")
-    model_out = "best_mobilenetv2.pth"
+    model_out = "best_efficientnetv2.pth"
     num_classes = 5
     batch_size  = 8
     epochs      = 40

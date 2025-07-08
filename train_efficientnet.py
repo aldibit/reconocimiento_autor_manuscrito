@@ -21,7 +21,11 @@ class Ensure3:
 
 def main():
     data_root = Path("dataset_split")
+<<<<<<< HEAD
     model_out = "best_efficientnet.pth" 
+=======
+    model_out = "best_efficientnetv2.pth"
+>>>>>>> e0ee69197572847bf3429827e5bc59824d8a96ed
     num_classes = 5
     batch_size  = 8
     epochs      = 40
@@ -141,6 +145,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+<<<<<<< HEAD
 # medimos eficiencia del modelo
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -170,3 +175,5 @@ if __name__ == "__main__":
 
     inference_time = (end - start) * 1000  # en milisegundos
     print(f"Tiempo inferencia (ms/batch): {inference_time:.2f}")
+=======
+>>>>>>> e0ee69197572847bf3429827e5bc59824d8a96ed

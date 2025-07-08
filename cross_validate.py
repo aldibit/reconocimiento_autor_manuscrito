@@ -99,6 +99,7 @@ def main():
     # Summary
     print("\nFold accuracies:", [f"{acc:.3f}" for acc in fold_accs])
     print("Mean accuracy :", np.mean(fold_accs))
+    print("Std deviation  :", np.std(fold_accs))
 
 if __name__ == "__main__":
     main()

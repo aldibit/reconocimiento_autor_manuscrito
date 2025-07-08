@@ -1,0 +1,5 @@
+Modelo,Parámetros (M),FLOPs (G),Tiempo inferencia (ms/batch)
+Baseline CNN,6.447,0.151,136.927
+MobileNetV2,2.23,0.319,218.796
+ResNet18,11.179,1.825,413.772
+EfficientNet,4.014,0.409,331.067
